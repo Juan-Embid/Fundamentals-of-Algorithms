@@ -1,52 +1,41 @@
-// NOMBRE Y APELLIDOS: Daniel Fernández Ortiz Grupo 2ºE
+// NOMBRE Y APELLIDOS: 
+//Daniel Fernández Ortiz
+//Juan Embid Sánchez
 
 #include <iostream>
 #include <fstream>
+
 using namespace std;
 
-const int MIN_DALTON = 2; // Constante que delimita el número mínimo de hermanos Dalton que existen
-const int MAX_HERMANOS = 100; // Constante que delimita el número máximo de hermanos
+const int MAX_HERMANOS = 100000;
 
-typedef int tArray[MAX_HERMANOS]; // Array de hermanos Dalton
-struct tLista { // Estructura que contiene la lista de hermanos Dalton
-    tArray hermanos;
-    int cont = 0;
-};
-
-bool comprobarHermanos(const tLista& lista) {
+bool compruebaHermanos(const int hermanos[], int cantidad) {
     int i = 0;
-    bool hermanos = true;
-    while ((i < lista.cont - 1) && hermanos) {
-        hermanos = (lista.hermanos[i] < lista.hermanos[i + 1]);
-        if (hermanos) {
-            i++;
-        }
+    bool dalton = true;
+    while ((i < cantidad) && dalton) {
+        if(i + 1 < cantidad)
+            dalton = (hermanos[i] < hermanos[i + 1]);
+        i++;
     }
-    return hermanos;
+
+    return dalton;
 }
 
 bool resuelveCaso() {
-    int n_hermanos;
-    tLista lista;
-    bool hermanos;
-    //Leer caso de prueba: cin>>...
-    cin >> n_hermanos;
-    if (n_hermanos == 0)
+    int cantidad;
+    int hermanos[MAX_HERMANOS];
+    cin >> cantidad;
+    if (cantidad == 0)
         return false;
-    else if ((n_hermanos >= MIN_DALTON) && (n_hermanos <= MAX_HERMANOS)) {
-        for (lista.cont = 0; lista.cont < n_hermanos; lista.cont++) {
-            cin >> lista.hermanos[lista.cont];
-        }
-    }
-    //Resolver problema
-    hermanos = comprobarHermanos(lista);
-    //Escribir resultado
-    if (hermanos) {
+
+    for (int i = 0; i < cantidad; i++)
+            cin >> hermanos[i];
+
+    if (compruebaHermanos(hermanos, cantidad))
         cout << "DALTON" << endl;
-    }
-    else {
+    else 
         cout << "DESCONOCIDOS" << endl;
-    }
+
     return true;
 }
 
@@ -58,17 +47,16 @@ int main() {
 #ifndef DOMJUDGE
     std::ifstream in("in.txt");
     auto cinbuf = std::cin.rdbuf(in.rdbuf());
-    std::ofstream out("out.txt");
-    auto coutbuf = std::cout.rdbuf(out.rdbuf());
+    //std::ofstream out("out.txt");
+    //auto coutbuf = std::cout.rdbuf(out.rdbuf());
 #endif
 
     while (resuelveCaso());
 
-    // restablecimiento de cin
 #ifndef DOMJUDGE
     std::cin.rdbuf(cinbuf);
-    std::cout.rdbuf(coutbuf);
-    system("pause");
+    //std::cout.rdbuf(coutbuf);
+    //system("pause");
 #endif
     return 0;
 }
