@@ -7,31 +7,31 @@ using namespace std;
 
 const int MAX_ALTURAS = 100000; 
 
-int contarAbadias(const int alturas[], int avadias) { 
-    int cont = 1, max = avadias - 1;
+int contarAbadias(const int alturas[], int abadias) { 
+    int cont = 1, max = abadias - 1;
 
-    for(int i = (avadias - 1); i >= 0; i--) {
+    for(int i = (abadias - 1); i > 0; i--) { // Al haber un >= 0 en vez de un > 0, se accedía a la posición alturas[-1]
         if(alturas[i - 1] > alturas[max]) {
-            max = alturas[i - 1];
+            max = i - 1; // En max se guardaba la altura de la montaña en vez de la posición de la montaña más alta
             cont++;
         }
     }
-    
+
     return cont;
 }
 
 bool resuelveCaso() {
     int alturas[MAX_ALTURAS];
-    int avadias;
+    int abadias;
 
-    cin >> avadias;
-    if (avadias == 0)
+    cin >> abadias;
+    if (abadias == 0)
         return false;
 
-    for (int i = 0; i < avadias; i++)
+    for (int i = 0; i < abadias; i++)
             cin >> alturas[i];
 
-    cout << contarAbadias(alturas, avadias) << endl;
+    cout << contarAbadias(alturas, abadias) << endl;
 
     return true;
 }
@@ -39,21 +39,7 @@ bool resuelveCaso() {
 
 int main() {
 
-    // ajuste para que cin extraiga directamente de un fichero
-#ifndef DOMJUDGE
-    //std::ifstream in("in.txt");
-    //auto cinbuf = std::cin.rdbuf(in.rdbuf());
-    //std::ofstream out("out.txt");
-    //auto coutbuf = std::cout.rdbuf(out.rdbuf());
-#endif
-
     while (resuelveCaso());
 
-    // restablecimiento de cin
-#ifndef DOMJUDGE
-    //std::cin.rdbuf(cinbuf);
-    //std::cout.rdbuf(coutbuf);
-    //system("pause");
-#endif
     return 0;
 }
