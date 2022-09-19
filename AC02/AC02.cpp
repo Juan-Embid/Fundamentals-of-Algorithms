@@ -27,6 +27,8 @@ bool IzdaDcha(const vector<int> temperaturas, int position) {
     return true;
 }
 
+// Precondicion: {numElems > 0}
+// Postcondicion: {IzdaDcha(v, p) = bool}
 bool resuelveCaso() {
     int numElems = 0;int p; size_t n;
     std::cin >> numElems >> p;
