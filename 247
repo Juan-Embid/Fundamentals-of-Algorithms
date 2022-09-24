@@ -5,7 +5,7 @@
 using namespace std;
 
 const int MAX_MUESTRAS = 100;
-
+// O(n) donde n es el tamaño del array que guarda los valores económicos
 bool resuelveCaso() {
     int n_muestras;
     int val_economicos[MAX_MUESTRAS] = {};
