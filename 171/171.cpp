@@ -6,7 +6,7 @@
 using namespace std;
 
 const int MAX_ALTURAS = 100000; 
-
+// O(n) donde n es el tamaño del array (abadias)
 int contarAbadias(const int alturas[], int abadias) { 
     int cont = 1, max = abadias - 1;
 
