@@ -1,0 +1,55 @@
+// 368 - Cociendo huevos
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int MAX_HUEVOS = 10000; 
+const int MAX_CAPACIDAD = 10000;
+
+// O(n) donde n es el número de huevos que se quieren cocer
+bool resuelveCaso() {
+    int huevos = 0, capacidad = 0, tiempo = 1;
+    //Leer caso de prueba: cin>>...
+    cin >> huevos >> capacidad;
+    if ((huevos == 0) && (capacidad == 0))
+        return false;
+    if ((huevos <= MAX_HUEVOS) && (capacidad <= MAX_CAPACIDAD)) {
+        if (huevos <= capacidad) {
+            tiempo = 10;
+        }
+        else {
+            tiempo = ((huevos / capacidad) * 10);
+            if ((huevos % capacidad) != 0) {
+                tiempo += 10;
+            }
+        }
+        cout << tiempo << endl;
+    }
+
+    //Resolver problema
+    //Escribir resultado
+    return true;
+}
+
+
+int main() {
+
+    // ajuste para que cin extraiga directamente de un fichero
+#ifndef DOMJUDGE
+    std::ifstream in("in.txt");
+    auto cinbuf = std::cin.rdbuf(in.rdbuf());
+    std::ofstream out("out.txt");
+    auto coutbuf = std::cout.rdbuf(out.rdbuf());
+#endif
+
+    while (resuelveCaso());
+
+    // restablecimiento de cin
+#ifndef DOMJUDGE
+    std::cin.rdbuf(cinbuf);
+    std::cout.rdbuf(coutbuf);
+    system("pause");
+#endif
+    return 0;
+}
