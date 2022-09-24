@@ -1,0 +1,61 @@
+// 247 - Saliendo de la crisis
+
+#include <iostream>
+#include <fstream>
+using namespace std;
+
+const int MAX_MUESTRAS = 100;
+
+bool resuelveCaso() {
+    int n_muestras;
+    int val_economicos[MAX_MUESTRAS] = {};
+    bool menor = false;
+    //Leer caso de prueba: cin>>...
+    cin >> n_muestras;
+    if (n_muestras == 0)
+        return false;
+    else if (n_muestras <= MAX_MUESTRAS) {
+        for (int i = 0; i < n_muestras; i++) {
+            cin >> val_economicos[i];
+        }
+        int i = 0;
+        while ((i < n_muestras - 1) && !menor) {
+            menor = (val_economicos[i] >= val_economicos[i + 1]);
+            if (!menor) {
+                i++;
+            }
+        }
+        if (menor) {
+            cout << "NO" << endl;
+        }
+        else {
+            cout << "SI" << endl;
+        }
+    }
+
+    //Resolver problema
+    //Escribir resultado
+    return true;
+}
+
+
+int main() {
+
+    // ajuste para que cin extraiga directamente de un fichero
+#ifndef DOMJUDGE
+    std::ifstream in("in.txt");
+    auto cinbuf = std::cin.rdbuf(in.rdbuf());
+    std::ofstream out("out.txt");
+    auto coutbuf = std::cout.rdbuf(out.rdbuf());
+#endif
+
+    while (resuelveCaso());
+
+    // restablecimiento de cin
+#ifndef DOMJUDGE
+    std::cin.rdbuf(cinbuf);
+    std::cout.rdbuf(coutbuf);
+    system("pause");
+#endif
+    return 0;
+}
