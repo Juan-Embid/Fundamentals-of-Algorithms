@@ -1,0 +1,25 @@
+// 117 - La fiesta aburrida
+#include <iostream>
+using namespace std;
+
+// O(n) donde n es el número de personas a las que se tienen que saludar en la fiesta
+void resuelveCaso() {
+    //resuelve aqui tu caso
+    string nombre, aux;
+    //Lee los datos
+    cin >> aux >> nombre;
+    //Calcula el resultado.
+    //Escribe el resultado
+    cout << "Hola, " << nombre << "." << endl;
+}
+
+int main() {
+    unsigned int numCasos;
+    std::cin >> numCasos;
+    // Resolvemos
+    for (int i = 0; i < numCasos; ++i) {
+        resuelveCaso();
+    }
+    return 0;
+}
+
