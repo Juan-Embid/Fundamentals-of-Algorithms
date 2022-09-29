@@ -9,22 +9,19 @@
 using namespace std;
 
 
-// Invariante:
-// Funcion de cota:
+// Invariante: -1 <= i <= v.size() - 1, ∧∀k : i < k < v.size() : sum(dese j = i + 1 hasta v.size() - 1) == v[i]
+// Funcion de cota: i
+// Justificacion del coste: en el caso peor O(N) donde N es v.size(), porque
+// el bucle tiene coste constante y se recorre v.size() veces.
 
-
-int equilibrio(vector<int> v) { // O(N) donde N es v.size()
-    int ceros = 0, unos = 0, pos = -1;
-    for(int i = 0; i < v.size(); i++) {
-        if(v[i] == 0)
-            ceros++;
-        else if(v[i] == 1)
-            unos++;
-        if(unos == ceros)
-            pos = i;
+int pastoso(vector<int> v) {
+    int suma = 0, i = v.size() - 1;
+    while(i >= 0 && v[i] != suma) {
+        suma += v[i];
+        i--;
     }
     
-    return pos;
+    return i;
 }
 
 bool resuelveCaso() {
@@ -37,7 +34,10 @@ bool resuelveCaso() {
             vals.push_back(temp);
     }
 
-    cout << equilibrio(vals) << endl;
+    if(pastoso(vals) == -1)
+        cout << "NO" << endl;
+    else
+        cout << "SI " << pastoso(vals) << endl;
 
     return true;
 }
