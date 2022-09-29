@@ -14,9 +14,24 @@ proc equilibrio(vector <int > v) dev int p
 ∧∀k : p < k < v.size() : numUnos(v, k + 1) 6= numCeros(v, k + 1)}
 donde numUnos(v, j) = #i : 0 ≤i < j : v[i] = 1 y numCeros(v, j) = #i : 0 ≤i < j : v[i] = 0.
  */
-int equilibrio(vector<int> v) {
+
+// Invariante: 0 <= i <= v.size(), ceros = numCeros(v, i), unos = numUnos(v, i), -1 <= pos < i && numCeros(v, pos + 1) == numUnos(v, pos + 1) && ∀k : p < k < v.size() : numUnos(v, k + 1) != numCeros(v, k + 1)
+// Funcion de cota: v.size() - 1 
+
+// Funcion de cota simpre decrece
+
+int equilibrio(vector<int> v) { // O(N) donde N es v.size()
+    int ceros = 0, unos = 0, pos = -1;
+    for(int i = 0; i < v.size(); i++) {
+        if(v[i] == 0)
+            ceros++;
+        else if(v[i] == 1)
+            unos++;
+        if(unos == ceros)
+            pos = i;
+    }
     
-    return 0;
+    return pos;
 }
 
 bool resuelveCaso() {
