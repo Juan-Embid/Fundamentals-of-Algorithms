@@ -9,10 +9,10 @@
 using namespace std;
 
 
-// Invariante: -1 <= i <= v.size() - 1, ∧∀k : i < k < v.size() : sum(dese j = i + 1 hasta v.size() - 1) == v[i]
+// Invatiante: ∀k : i < k < v.size() : v[k] != suma(desde j = k + 1 hasta v.size() - 1) v[j]
 // Funcion de cota: i
 // Justificacion del coste: en el caso peor O(N) donde N es v.size(), porque
-// el bucle tiene coste constante y se recorre v.size() veces.
+// el coste de cada iteración del bucle es constante y el número de iteraciones es de O(v.size())
 
 int pastoso(vector<int> v) {
     int suma = 0, i = v.size() - 1;
