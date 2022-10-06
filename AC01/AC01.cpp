@@ -9,7 +9,7 @@
 using namespace std;
 
 
-// Invatiante: ∀k : i < k < v.size() : v[k] != suma(desde j = k + 1 hasta v.size() - 1) v[j]
+// Invatiante: -1 <= i <= v.size() - 1 && ∀k : i < k < v.size() : v[k] != suma(desde j = k + 1 hasta v.size() - 1) v[j]
 // Funcion de cota: i
 // Justificacion del coste: en el caso peor O(N) donde N es v.size(), porque
 // el coste de cada iteración del bucle es constante y el número de iteraciones es de O(v.size())
