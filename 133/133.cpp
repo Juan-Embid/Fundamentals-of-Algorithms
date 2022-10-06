@@ -23,23 +23,24 @@ pair<int, int> rescateAereo(const vector<int> edificios, int t) {
     pair<int, int> seg = { 0, 0 };
     bool mayor = false;
 
-    for(int i = 0; i < edificios.size(); i++) {
-        if(edificios[i] > t) {
-            if(!mayor) {
+    for (int i = 0; i < edificios.size(); i++) {
+        if (edificios[i] > t) {
+            if (!mayor) {
                 seg = { i, i };
                 mayor = true;
-            } else {
-                seg.second++;
-                if(seg.second - seg.first > segMax.second - segMax.first) 
+                if (seg.second - seg.first > segMax.second - segMax.first)
                     segMax = seg;
             }
-        } else {
+            else {
+                seg.second++;
+                if (seg.second - seg.first > segMax.second - segMax.first)
+                    segMax = seg;
+            }
+        }
+        else {
             mayor = false;
         }
     }
-    if(seg.second - seg.first > segMax.second - segMax.first)
-        segMax = seg;
-
     return segMax;
 }
 
