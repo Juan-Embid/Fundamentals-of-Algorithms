@@ -26,7 +26,7 @@ Cada vuelta del bucle es constante, entonces v.size() * O(1) = O(N) donde N es v
  */
 
 int equilibrio(vector<int> v) { // O(N) donde N es v.size()
-    int ceros = 0, unos = 0, pos = -1;
+    int ceros = 0, unos = 0, pos = -1; 
     for(int i = 0; i < v.size(); i++) {
         if(v[i] == 0)
             ceros++;
