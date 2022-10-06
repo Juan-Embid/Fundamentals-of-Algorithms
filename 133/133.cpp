@@ -14,33 +14,34 @@ proc rescateAereo(vector <int> v, int N, in out int inicio, in out final)
  */
 
 // Invariante: 
-// Funcion de cota: v.size() - i
+// Funcion de cota:
+// Coste:
 
 
-/* 
-
- */
-
-
-void rescateAereo(const vector<int> edificios, int t, int & inicio, int & fin) {
-    int maxIni = 0, maxFin = 0;
+pair<int, int> rescateAereo(const vector<int> edificios, int t) {
+    pair<int, int> segMax = { 0, -1 };
+    pair<int, int> seg = { 0, 0 };
     bool mayor = false;
+
     for(int i = 0; i < edificios.size(); i++) {
-        mayor = ((inicio - fin) == 0);
-        if(edificios[i] > t && !mayor) {
-            inicio = i;
-            fin = i;
-            mayor = true;
-        } else if (edificios[i] < t){
+        if(edificios[i] > t) {
+            if(!mayor) {
+                if(seg.second - seg.first > segMax.second - segMax.first) {
+                    segMax = seg;
+                }
+                seg = { i, i };
+                mayor = true;
+            } else
+                seg.second++;
+        } else {
             mayor = false;
-            maxIni = inicio;
-            maxFin = fin;
         }
     }
+    return segMax;
 }
 
 bool resuelveCaso() {
-    int n, t, temp, inicio, fin;
+    int n, t, temp;
     vector<int> edificios;
 
     cin >> n >> t;
@@ -49,7 +50,7 @@ bool resuelveCaso() {
             edificios.push_back(temp);
     }
 
-    cout << inicio << fin << "\n";
+    cout << rescateAereo(edificios, t).first << " " << rescateAereo(edificios, t).second << "\n";
 
     return true;
 }
