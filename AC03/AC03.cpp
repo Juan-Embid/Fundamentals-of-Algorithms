@@ -8,7 +8,11 @@
 
 using namespace std;
 
-// Invariante: 
+// Invariante:  (0 <= i <= v.size()) && (min PERTENECE A v) && (sum >= 0) && (contMin >= 0) con
+// min = EXISTE j tq PARA TODO k : 0 <= k < v.size() v[j] <= v[k]
+// sum = sumatorio(desde i = 0 hasta i = v.size() - 1) de v[i]
+// contMin = sum(v[i]) <=> v[i] = min(v) PARA TODO i : 0 <= i < v.size()
+
 // Funcion de cota: v.size() - 1 
 
 /* El coste del algoritmo es el coste del bucle. El bucle se recorre v.size() veces
