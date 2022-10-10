@@ -1,6 +1,6 @@
 // NOMBRE Y APELLIDOS: 
-// Daniel Fernández Ortiz
-// Juan Embid Sánchez
+// Daniel Fernï¿½ndez Ortiz
+// Juan Embid Sï¿½nchez
 
 #include <iostream>
 #include <fstream>
@@ -19,30 +19,27 @@ using namespace std;
  Cada vuelta del bucle es constante, entonces (v.size() - 1) * O(1) = O(N) donde N es v.size() - 1
   */
 
-long long int mayorTramo(vector<long long int> v) { // O(N) donde N es v.size()
-    long long int longitud = 1;
-    long long int aux_long = 1;
+int mayorTramo(vector<int> v) { // O(N) donde N es v.size()
+    int maxLength = 1;
+    int length = 1;
     for (int i = 0; i < v.size() - 1; i++) {
-        if (v[i] >= v[i + 1]) {
-            aux_long++;
-        }
-        else {
-            if (aux_long > longitud) {
-                longitud = aux_long;
-                aux_long = 1;
-            }
+        if (v[i] >= v[i + 1])
+            length++;
+        else if (length > maxLength) {
+            maxLength = length;
+            length = 1;
         }
     }
-    if (aux_long > longitud) {
-        longitud = aux_long;
-    }
-    return longitud;
+    if (length > maxLength)
+        maxLength = length;
+    
+    return maxLength;
 }
 
 bool resuelveCaso() {
     int size;
-    long long int temp;
-    vector<long long int> vals;
+    int temp;
+    vector<int> vals;
 
     cin >> size;
     for (int i = 0; i < size; i++) {
@@ -50,7 +47,10 @@ bool resuelveCaso() {
         vals.push_back(temp);
     }
 
-    cout << mayorTramo(vals) << endl;
+    if(!vals.empty())
+        cout << mayorTramo(vals) << endl;
+    else 
+        cout << 0 << endl;
 
     return true;
 }
