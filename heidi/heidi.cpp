@@ -28,8 +28,6 @@ vector<int> mayorTramo(const vector<int> &v, int minSize) { // O(N) donde N es v
         eqVal = (v[i] == v[i - 1]);
         if (eqVal) {
             contEq++;
-            if(i - 1 == 0)
-                llanosCont++;
         }
         else {
             if (contEq >= minSize){
@@ -38,8 +36,9 @@ vector<int> mayorTramo(const vector<int> &v, int minSize) { // O(N) donde N es v
             }
             contEq = 1;
         }
-        if(contEq > llanosMax)
+        if(contEq > llanosMax && contEq >= minSize) {
             llanosMax = contEq;
+        }
         if(v[i] > max)
             max = v[i];
     }
