@@ -28,20 +28,22 @@ vector<int> mayorTramo(const vector<int> &v, int minSize) { // O(N) donde N es v
         eqVal = (v[i] == v[i - 1]);
         if (eqVal) {
             contEq++;
+            if(i - 1 == 0)
+                llanosCont++;
         }
         else {
             if (contEq >= minSize){
                 llanosCont++;
-                temp.push_back(i + contEq);
+                temp.push_back(i + contEq -1);
             }
-            if(llanosCont > llanosMax)
-                llanosMax = llanosCont;
             contEq = 1;
         }
+        if(contEq > llanosMax)
+            llanosMax = contEq;
         if(v[i] > max)
             max = v[i];
     }
-
+    
     sol.push_back(llanosMax);
     sol.push_back(llanosCont);
     for(int i = 0; i < temp.size(); i++)
@@ -54,9 +56,10 @@ bool resuelveCaso() {
     int size, temp, minSize;
     vector<int> vals, vTemp;
 
-    cin >> size;
     if(!cin)
         return false;
+
+    cin >> size;
     cin >> minSize;
     for (int i = 0; i < size; i++) {
         cin >> temp;
@@ -84,7 +87,7 @@ int main() {
     //auto coutbuf = std::cout.rdbuf(out.rdbuf());
 #endif
 
-    resuelveCaso();
+    while(resuelveCaso());
 
 #ifndef DOMJUDGE
     std::cin.rdbuf(cinbuf);
