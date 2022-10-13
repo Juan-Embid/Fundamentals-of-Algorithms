@@ -25,14 +25,12 @@ int mayorTramo(vector<int> v) { // O(N) donde N es v.size()
     for (int i = 0; i < v.size() - 1; i++) {
         if (v[i] >= v[i + 1])
             length++;
-        else if (length > maxLength) {
-            maxLength = length;
+        else
             length = 1;
-        }
+        if (length > maxLength)// importante llevar el maximo hasta el momento
+            maxLength = length;
     }
-    if (length > maxLength)
-        maxLength = length;
-    
+
     return maxLength;
 }
 
