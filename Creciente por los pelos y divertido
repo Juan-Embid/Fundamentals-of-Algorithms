@@ -21,7 +21,7 @@ using namespace std;
 */
 
 // Coste: El coste del bucle es constante porque cada iteración del bucle es constante.
-// Como el bucle se recorre N = (v.size() - 1) veces, el coste del algoritmo es O(1) * (N) = O(N)
+// Como el bucle se recorre (en el caso peor) N = (v.size() - 1) veces, el coste del algoritmo es O(1) * (N) = O(N)
 
 bool crecienteYDivertido(const vector<int>& v, int d) {
     bool creciente = true, divertido = true;
