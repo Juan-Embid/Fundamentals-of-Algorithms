@@ -21,26 +21,32 @@ using namespace std;
 
 vector<int> mayorTramo(const vector<int> &v, int minSize) { // O(N) donde N es v.size()
     vector<int> sol, temp;
-    int max = 0, contEq = 1, llanosCont = 0, llanosMax = 0;
+    int max = v.back(), contEq = 1, llanosCont = 0, llanosMax = 0, cont = 0;
     bool eqVal = false;
 
     for(int i = v.size() - 1; i > 0; i--) {
         eqVal = (v[i] == v[i - 1]);
-        if (eqVal) {
-            contEq++;
-        }
-        else {
-            if (contEq >= minSize){
+        if(!eqVal)
+            cont++;
+        if(contEq >= minSize && v[i] >= max)
+            if(!eqVal || i == 1) {
                 llanosCont++;
-                temp.push_back(i + contEq -1);
+                if(cont != 0)
+                    temp.push_back(i + contEq -1);
             }
+        if (eqVal)
+            contEq++;
+        else 
             contEq = 1;
-        }
-        if(contEq > llanosMax && contEq >= minSize) {
+        if(contEq > llanosMax && contEq >= minSize && v[i - 1] >= max)
             llanosMax = contEq;
-        }
-        if(v[i] > max)
-            max = v[i];
+        if(v[i - 1] > max)
+            max = v[i - 1];
+    }
+
+    if(contEq == v.size()) {
+        llanosCont = 1;
+        temp.push_back(v.size() - 1);
     }
     
     sol.push_back(llanosMax);
@@ -55,11 +61,13 @@ bool resuelveCaso() {
     int size, temp, minSize;
     vector<int> vals, vTemp;
 
-    if(!cin)
-        return false;
 
     cin >> size;
     cin >> minSize;
+
+    if(!cin)
+        return false;
+
     for (int i = 0; i < size; i++) {
         cin >> temp;
         vals.push_back(temp);

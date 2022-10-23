@@ -1,6 +1,6 @@
-// NOMBRE Y APELLIDOS:
-// Daniel Fernández Ortiz
-// Juan Embid Sánchez
+// NOMBRE Y APELLIDOS
+// DANIEL FERN�NDEZ ORTIZ
+// JUAN EMBID S�NCHEZ
 
 #include<iostream>
 #include<fstream>
