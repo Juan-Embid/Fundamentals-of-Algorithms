@@ -26,22 +26,12 @@ vector<int> mayorTramo(const vector<int> &v, int minSize) { // O(N) donde N es v
 
     for(int i = v.size() - 1; i > 0; i--) {
         eqVal = (v[i] == v[i - 1]);
-        if(contEq >= minSize && v[i] >= max)
-            if(contEq == minSize) {
-                llanosCont++;
-                temp.push_back(i + contEq -1);
-            }
         if (!eqVal || v[i-1]<max) {contEq=1;} else {contEq++;}
         if(contEq > llanosMax && contEq >= minSize)
             llanosMax = contEq;
+        if(contEq == minSize) {llanosCont++; temp.push_back(i + contEq -2);}
         if(v[i - 1] > max)
             max = v[i - 1];
-    }
-
-    if(contEq == v.size()) {
-        if(llanosCont == v.size() % minSize) 
-            temp.push_back(v.size() - 1);
-        llanosCont = 1;
     }
     
     sol.push_back(llanosMax);
