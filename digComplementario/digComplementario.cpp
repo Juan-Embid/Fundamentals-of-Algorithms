@@ -29,6 +29,18 @@ void invNum(long int num, long int& inv) {
     }
 }
 
+/*void complementario(long int num, int&n, long int& nCompl, long long int& nDigitos) {
+    if (num == 0 && nDigitos == 1) {
+        nCompl = 9;
+    }
+    if (num > 0) {
+        n = num % 10;
+        nCompl = nCompl + (9 - n) * nDigitos;
+        nDigitos = nDigitos * 10;
+        complementario(num / 10, n, nCompl, nDigitos);
+    }
+}*/
+
 void complementario(long int num, long int& nCompl, bool ok) {
     int reminder;
 
@@ -54,6 +66,12 @@ bool resuelveCaso() {
     complementario(inv, test, false);
 /*     //opcion 2
     invNum(nCompl, inv); */
+     /*if (num % 10 == 0 && num != 0) {
+        cout << nCompl << " " << num << "\n";
+    }
+    else {
+        cout << nCompl << " " << inv << "\n";
+    }*/
     cout << inv << " " << nCompl << "\n";
 
     return true;
