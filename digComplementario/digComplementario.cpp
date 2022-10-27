@@ -32,11 +32,13 @@ void invNum(long int num, long int& inv) {
 void complementario(long int num, long int& nCompl, bool ok) {
     int reminder;
 
+    // para el caso en el que recibo un 0 hago una sola iteración
     if(num == 0) {
         if(!ok) {
             reminder = num % 10;
             nCompl = nCompl * 10 + (9 - reminder); }
         return;
+    // para el resto de casos
     } else {
         reminder = num % 10;
         nCompl = nCompl * 10 + (9 - reminder);
@@ -54,7 +56,7 @@ bool resuelveCaso() {
     complementario(inv, test, false);
 /*     //opcion 2
     invNum(nCompl, inv); */
-    cout << inv << " " << nCompl << "\n";
+    cout << test << " " << nCompl << "\n";
 
     return true;
 }
