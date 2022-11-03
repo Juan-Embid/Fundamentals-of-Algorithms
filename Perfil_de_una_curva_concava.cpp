@@ -1,6 +1,6 @@
 // NOMBRE Y APELLIDOS:
-// Daniel FernÃ¡ndez Ortiz
-// Juan Embid SÃ¡nchez
+// Daniel Fernández Ortiz
+// Juan Embid Sánchez
 
 #include<iostream>
 #include<fstream>
@@ -13,25 +13,28 @@ Invariante:
 *
 */
 
-// FunciÃ³n de cota: v.size() - i
+// Función de cota: v.size() - i
 
-// Coste: El coste del bucle es constante porque cada iteraciÃ³n del bucle es constante.
+// Coste: El coste del bucle es constante porque cada iteración del bucle es constante.
 // Como el bucle se recorre (en el caso peor) N = v.size() veces, el coste del algoritmo es O(1) * (N) = O(N)
-
 
 void minimo(const vector<int>& v, int c, int f, int& min) {
     int m;
-    if (c == f + 1) { min = v[c - 1]; }
+    if (c + 1 == f || c == f) {
+        if (v[c] <= v[f]) { min = v[c]; }
+        else { min = v[f]; }
+    }
     else {
         m = (c + f) / 2;
-        if (v[c] > v[m]) { minimo(v, m, f, min); }
-        else if (v[c] < v[m]) { minimo(v, c, m, min); }
-        else if (v[m] == v[c] && v[m] > v[f]) { min = v[f]; } // este soluciona el caso de prueba donde el minimo es el ultimo elemento
-        //(sale v[v.size()-2], en el segundo caso de prueba sale 3 en vez de 2)^^
-        else { min = v[m]; }
+        if (v[c] >= v[m]) {
+            minimo(v, m, f, min);
+        }
+        else {
+            minimo(v, c, m - 1, min);
+        }
     }
-    //return min;
 }
+
 
 bool resuelveCaso() {
     int size, temp, ini = 0, fin, min;
@@ -43,7 +46,6 @@ bool resuelveCaso() {
         vals.push_back(temp);
     }
     fin = (int)vals.size() - 1;
-    //cout << minimo(vals, ini, fin);
     minimo(vals, ini, fin, min);
     cout << min << "\n";
 
