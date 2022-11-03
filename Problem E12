@@ -1,0 +1,76 @@
+// NOMBRE Y APELLIDOS: 
+// Daniel Fern�ndez Ortiz
+// Juan Embid S�nchez
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+
+using namespace std;
+// 21 - recursion a medida que se lee de la entrada
+// 24 y 25 son el mismo problema
+// 17 18 19 20 son de busqueda
+
+// Invariante: 
+// aux_long = 
+// longitud = 
+
+// Funcion de cota: v.size() - i
+
+/* El coste del algoritmo es ... */
+
+void eliminaImpares(vector<long long int>& v) {
+    int p = 0; // desde 0 hasta p sin incluir son todo pares
+    for (int i = 0; i < v.size(); i++) {
+        if (v[i] % 2 == 0) {
+            v[p] = v[i];
+            p++;
+        }
+    }
+    v.resize(p);
+}
+
+bool resuelveCaso() {
+    int size;
+    int temp;
+    vector<long long int> vals;
+
+    cin >> size;
+    for (int i = 0; i < size; i++) {
+        cin >> temp;
+        vals.push_back(temp);
+    }
+    eliminaImpares(vals);
+
+    for (int i = 0; i < vals.size(); i++) {
+        cout << vals[i] << " ";
+    }
+    cout << "\n";
+
+    return true;
+}
+
+int main() {
+
+    // ajuste para que cin extraiga directamente de un fichero
+#ifndef DOMJUDGE
+    std::ifstream in("in.txt");
+    auto cinbuf = std::cin.rdbuf(in.rdbuf());
+    //std::ofstream out("out.txt");
+    //auto coutbuf = std::cout.rdbuf(out.rdbuf());
+#endif
+
+    unsigned int numCasos;
+    std::cin >> numCasos;
+    // Resolvemos
+    for (int i = 0; i < numCasos; ++i) {
+        resuelveCaso();
+    }
+
+#ifndef DOMJUDGE
+    std::cin.rdbuf(cinbuf);
+    //std::cout.rdbuf(coutbuf);
+    //system("pause");
+#endif
+    return 0;
+}
