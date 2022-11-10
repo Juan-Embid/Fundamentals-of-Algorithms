@@ -1,6 +1,6 @@
 // NOMBRE Y APELLIDOS:
-// Daniel Fernández Ortiz
-// Juan Embid Sánchez
+// Daniel FernÃ¡ndez Ortiz
+// Juan Embid SÃ¡nchez
 
 #include<iostream>
 #include<fstream>
@@ -13,9 +13,9 @@ Invariante:
 *
 */
 
-// Función de cota: v.size() - i
+// FunciÃ³n de cota: v.size() - i
 
-// Coste: El coste del bucle es constante porque cada iteración del bucle es constante.
+// Coste: El coste del bucle es constante porque cada iteraciÃ³n del bucle es constante.
 // Como el bucle se recorre (en el caso peor) N = v.size() veces, el coste del algoritmo es O(1) * (N) = O(N)
 
 void minimo(const vector<int>& v, int c, int f, int& min) {
@@ -26,11 +26,11 @@ void minimo(const vector<int>& v, int c, int f, int& min) {
     }
     else {
         m = (c + f) / 2;
-        if (v[c] >= v[m]) {
-            minimo(v, m, f, min);
+        if (v[m] > v[m + 1]) {
+            minimo(v, m + 1, f, min);
         }
         else {
-            minimo(v, c, m - 1, min);
+            minimo(v, c, m, min);
         }
     }
 }
@@ -46,7 +46,7 @@ bool resuelveCaso() {
         vals.push_back(temp);
     }
     fin = (int)vals.size() - 1;
-    minimo(vals, ini, fin, min);
+    minimo(vals,ini, fin,min);
     cout << min << "\n";
 
     return true;
