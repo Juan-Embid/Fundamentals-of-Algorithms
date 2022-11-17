@@ -20,11 +20,15 @@ Invariante:
 
 
 
-void busqueda(const vector<char>& v, int c, int f, char ini, char& found) {
+void busqueda(const vector<char>& v, int c, int f, char ini, char fin, char& found) {
     int m;
     if (v[0] != ini) {
         found = ini;
-    } else {
+    }
+    else if (v[(int)v.size() - 1] != fin) {
+        found = fin;
+    }
+    else {
         if (f == c + 1) {
             found = v[c] + 1;
             //found = - v[c] + v[f];
@@ -32,32 +36,18 @@ void busqueda(const vector<char>& v, int c, int f, char ini, char& found) {
         else {
             m = (c + f) / 2;
             if (v[m] - v[c] == m - c) { // no falta ninguno en el lado izq
-                busqueda(v, m, f, ini, found);
+                busqueda(v, m, f, ini, fin, found);
             }
             else if (v[f] - v[m] == f - m) { // no falta ninguno en el lado dcho
-                busqueda(v, c, m, ini, found);
+                busqueda(v, c, m, ini, fin, found);
             }
         }
     }
-    
-    //if (c == f + 1) { min = v[f]; }
-    //else { // c <= f
-    //    m = (c + f) / 2;
-    //    if (v[m] <= min) { busqueda(v, m + 1, f, min); }
-    //    else { busqueda(v, c, m - 1, min); }
-    //}
-}
-
-/* int sol2(vector<char> val, int c, int f) {
-    for(int i = c; i < f; i++) 
-        if(val[i] == 0)
-            return i;
-} */
 
 
 bool resuelveCaso() {
     int size, ini = 0, fin;
-    char found, c, f, temp;
+    char found = '-', c, f, temp;
     //vector<char> vals(128, 0);
     vector<char> vals;
     cin >> c >> f;
@@ -70,7 +60,7 @@ bool resuelveCaso() {
         vals.push_back(temp);
     }
     //found = sol2(vals, c, f);
-    busqueda(vals, ini, fin,c,  found);
+    busqueda(vals, ini, fin, c, f, found);
     cout << found << "\n";
 
     return true;
