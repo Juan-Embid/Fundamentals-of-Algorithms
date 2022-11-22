@@ -9,6 +9,41 @@
 
 using namespace std;
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// SOLUCIÓN DE CLARA
+// a) todosPares(v, p, q) = (forall i : p <= i < q : v[i] % 2 = 0)
+// e) En el caso peor el coste es O(n) donde n es v.size(), siendo el coste del algoritmo el coste del bucle, cuya cada iteración es constante
+
+// ESPECIFICA la funcion que resuelve el problema
+
+//PRECONDICION: {0 <= v.size() && forall i: 0 <= i < v.size() : v[i] >= 0}
+
+	/* INVARIANTE:
+	* 0 <= i <= v.size() &&
+	* s = #(p, q : 0 <= p < q <= i tq todosPares(v, p, q)) && 
+	* z = min (j : 0 <= j <= i tq todosPares(v, j, i) : j) 
+	*/
+	//F. COTA: v.size() - i
+
+
+/*
+int resolver(vector<int> const& v) {
+	int i = 0, s = 0, z = 0;
+	while (i < v.size()) {
+		if (v[i] % 2 == 0) {
+			s = s + (i - z + 1);
+		}
+		else {
+			z = i + 1;
+		}
+		i++;
+	}
+	return s;
+}*/
+
+//POSTCONDICION: {s = #(p,q : 0 <= p < q <= v.size() && todosPares(v, p, q))}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // a) todosPares(v, p, q) = (forall i : p <= i < q : v[i] % 2 == 0)
 // b) 
 // c) 
