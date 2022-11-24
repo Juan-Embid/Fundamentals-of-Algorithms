@@ -1,6 +1,6 @@
 // NOMBRE Y APELLIDOS 
-// Daniel Fernández Ortiz
-// Juan Embid Sánchez
+// Daniel Fernï¿½ndez Ortiz
+// Juan Embid Sï¿½nchez
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -9,11 +9,14 @@ using namespace std;
 
 
 void resolver(vector<int> const& v, int c, int f, int d, int& n) {
-	if (c + 1 == f) { // CB
+	if (c == f) { // CB 1 elemento
+		n = v[c] + d;
+	}
+	else if (c + 1 == f) { // CB 2 elementos
 		if (v[f] - v[c] != d) { // falta entre c y f
 			n = v[c] + d;
 		}
-		else { // falta el último
+		else { // falta el ï¿½ltimo
 			n = v[f] + d;
 		}
 	}
