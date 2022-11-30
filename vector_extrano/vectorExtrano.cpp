@@ -7,48 +7,58 @@
 
 using namespace std;
 
-struct strange {
+struct Solucion {
+    bool strange;
     int sumaPares;
     int sumaImpares;
     int productoPares;
     int productoImpares;
 };
-
-// mitad izq: suma pares + producto impares
-// mitad der: suma impares + producto pares
-bool extrano(const vector<int>& v, int ini, int fin, strange& ex) {
-    int m;
-    if (v.empty()) // CB: 0 elementos
-        return true;
-    else if (ini == fin) { // CB: 1 elemento
-        if (v.at(ini) % 2 == 0) { 
-            ex.sumaPares = v.at(ini);
-            ex.productoImpares = 1;
-            ex.sumaImpares = 0;
-            ex.productoPares = v.at(ini);
+// RECURRENCIA: Sea n el tamaño del vector
+// T(n) = k ,si n = {0,1}
+// T(n) = 2T(n/2) + cn, si n > 1
+// T(n) en el caso peor pertenece a O(nlogn) por tener dos llamadas recursivas de tamaño la mitad + algo lineal
+// INTERVALO CERRADO: llamada inicial con c = 0 y f = v.size() - 1
+Solucion extrano(const vector<int>& v, int c, int f) {
+    Solucion sol; int m;
+    if (c == f + 1) { // CB: vector vacío
+        sol.strange = true;
+        sol.sumaImpares = 0;
+        sol.sumaPares = 0;
+        sol.productoImpares = 1;
+        sol.productoPares = 1;
+    }
+    else if (c == f) { // CB: 1 elemento
+        sol.strange = true;
+        if (v.at(c) % 2 == 0) {
+            sol.sumaImpares = 0;
+            sol.sumaPares = v.at(c);
+            sol.productoImpares = 1;
+            sol.productoPares = v.at(c);
         }
         else {
-            ex.sumaPares = 0;
-            ex.productoImpares = v.at(ini);
-            ex.sumaImpares = v.at(ini);
-            ex.productoPares = 1;
+            sol.sumaImpares = v.at(c);
+            sol.sumaPares = 0;
+            sol.productoImpares = v.at(c);
+            sol.productoPares = 1;
         }
-    return true;
     }
     else { // CR
-        m = (ini + fin) / 2;
-        strange ex2;
-        extrano(v, ini, m, ex); // izquierda
-        if (ex.sumaPares + ex.productoImpares <= ex.sumaImpares + ex.productoPares) {
-            extrano(v, m + 1, fin, ex2); // derecha
-        }
-        return (ex.sumaPares + ex.productoImpares <= ex2.sumaImpares + ex2.productoPares);
+        Solucion aux1, aux2;
+        m = (c + f) / 2;
+        aux1 = extrano(v, c, m);
+        aux2 = extrano(v, m + 1, f);
+        sol.strange = ((aux1.strange || aux2.strange) && (aux1.sumaPares + aux1.productoImpares <= aux2.productoPares + aux2.sumaImpares));
+        sol.sumaImpares = aux1.sumaImpares + aux2.sumaImpares;
+        sol.productoImpares = aux1.productoImpares + aux2.productoImpares;
+        sol.sumaPares = aux1.sumaPares + aux2.sumaPares;
+        sol.productoPares = aux1.productoPares + aux2.productoPares;
     }
+    return sol;
 }
 
 void resuelveCaso() {
     vector<int> vals;
-    strange ex;
     int size, temp, c, f;
     cin >> size;
     for (int i = 0; i < size; i++) {
@@ -56,10 +66,9 @@ void resuelveCaso() {
         vals.push_back(temp);
     }
     c = 0; f = (int)vals.size() - 1;
-    if (extrano(vals, c, f, ex))
-        cout << "SI\n";
-    else
-        cout << "NO\n";
+    Solucion sol = extrano(vals, c, f);
+    if (sol.strange) cout << "SI\n";
+    else cout << "NO\n";
 }
 
 int main() {
