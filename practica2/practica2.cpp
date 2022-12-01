@@ -19,9 +19,9 @@ int resolver(const vector<int>& v, int c, int f){
     } else { // CR
         m = (c + f) / 2;
         if ((v.at(m) - v.at(c)) / 2 != m - c) { // elemento impar en izquierda
-            resolver(v, c, m);
+            return resolver(v, c, m);
         } else if ((v.at(f) - v.at(m + 1)) / 2 != f - m + 1) { // elemento impar en derecha
-            resolver(v, m + 1, f);
+            return resolver(v, m + 1, f);
         }
     }
 }
